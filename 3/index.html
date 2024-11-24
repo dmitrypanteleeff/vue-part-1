@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#1 - Vue Init; work with data</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <header id="app2">
+        {{title}}
+    </header>
+    <h1>Hello html</h1>
+
+    <div class="wrapper">
+        <div id="app">
+            <div class="app__header">
+                {{ priority.title }} - {{ priority.value }}
+            </div>
+
+            <div class="app__body">
+                <button v-on:click="down">{{buttons.prev.title}}</button>
+                <button @click="up">{{buttons.next.title}}</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const App = {
+            data () {
+                return {  
+                    priority: {
+                        title: 'My Title',
+                        value: 0
+                    },
+                    buttons: {
+                        prev: {
+                            title: "Down"
+                        },
+                        next: {
+                            title: "Up"
+                        }
+                    }
+                }
+            },
+            methods: {
+                change() {
+                    this.title = 'updated title!!!!'
+                },
+                down() {
+                    this.priority.value -= 1;
+                },
+                up() {
+                    this.priority.value += 1;
+                },
+            }
+        }
+
+        const App2 = {
+            data () {
+                return {
+                    title: 'header'
+                }
+            }
+        }
+
+        Vue.createApp(App).mount('#app');
+        Vue.createApp(App2).mount('#app2');
+        console.log(Vue)
+    </script>
+</body>
+</html>
