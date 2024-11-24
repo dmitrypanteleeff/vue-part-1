@@ -14,10 +14,14 @@
 
     <div class="wrapper">
         <div id="app">
+            <div class="app__header">
+                {{ priority.title }} - {{ priority.value }}
+            </div>
 
-            {{title}}
-
-            <button @click="change">change</button>
+            <div class="app__body">
+                <button>{{buttons.prev.title}}</button>
+                <button>{{buttons.next.title}}</button>
+            </div>
 
         </div>
     </div>
@@ -26,7 +30,18 @@
         const App = {
             data () {
                 return {  
-                    title: 'My Title'
+                    priority: {
+                        title: 'My Title',
+                        value: 0
+                    },
+                    buttons: {
+                        prev: {
+                            title: "Down"
+                        },
+                        next: {
+                            title: "Up"
+                        }
+                    }
                 }
             },
             methods: {
