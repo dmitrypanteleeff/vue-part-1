@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#1 - Vue Init; work with data</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="app">
+            <input type="text" placeholder="url" :value="img.imgUrl"/>
+            <input type="text" placeholder="title" :value="img.title"/>
+            <br>
+            <img @click="changeImg" 
+                :src="img.imgUrl" 
+                :alt="img.title" 
+                v-bind:title="title"
+                width="300px" />
+
+        </div>
+    </div>
+
+    <script>
+        const App = {
+            data () {
+                return {  
+                    img: {
+                        title: 'earthworm',
+                        imgUrl: './img/img1.jpg'
+                    }
+                }
+            },
+            methods: {
+                changeImg() {
+                    const images = [ './img/img1.jpg', './img/img2.jpg'];
+
+                    const index = Math.floor(Math.random() * images.length);
+
+                    this.img.imgUrl = images[index];
+                }
+            },
+            computed: {
+                message() {
+                    const messages = {
+                        welcome: 'Make some vote',
+                        save: 'Saved'
+                    };
+                    return this.priority.value === 0 ? messages.welcome : messages.save;
+                }
+            }
+        }
+
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+</html>
