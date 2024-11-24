@@ -9,15 +9,17 @@
 <body>
     <div class="wrapper">
         <div id="app">
-            <input type="text" placeholder="url" :value="img.imgUrl"/>
-            <input type="text" placeholder="title" :value="img.title"/>
+            <input type="checkbox" v-model="img.showImg"/>
+            <input type="text" placeholder="url" v-model="img.imgUrl"/>
+            <input type="text" placeholder="title" v-model="img.title"/>
             <br>
-            <img @click="changeImg" 
-                :src="img.imgUrl" 
-                :alt="img.title" 
-                v-bind:title="title"
-                width="300px" />
-
+            <div v-if="img.showImg">
+                <img @click="changeImg" 
+                    :src="img.imgUrl" 
+                    :alt="img.title" 
+                    v-bind:title="img.title"
+                    width="300px" />
+            </div>
         </div>
     </div>
 
@@ -27,8 +29,9 @@
                 return {  
                     img: {
                         title: 'earthworm',
-                        imgUrl: './img/img1.jpg'
-                    }
+                        imgUrl: './img/img1.jpg',
+                        showImg: true
+                    },
                 }
             },
             methods: {
