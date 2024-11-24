@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#1 - Vue Init; work with data</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <header id="app2">
+        {{title}}
+    </header>
+    <h1>Hello html</h1>
+
+    <div class="wrapper">
+        <div id="app">
+            {{ message }}
+
+            <div class="app__header">
+                {{ priority.title }} - {{ priority.value }}
+            </div>
+
+            <div>
+                <p v-if="priority.value === 3"> priority 3</p>
+                <p v-else-if="priority.value === 1 || priority.value === 2"> priority 1 or priority 2</p>
+                <p v-else> priority 0</p>
+            </div>
+
+            <div class="app__body">
+                <div v-if="priority.value > 0">
+                    <button v-on:click="down">{{buttons.prev.title}}</button>
+                </div>
+                
+                <button @click="up">{{buttons.next.title}}</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        const App = {
+            data () {
+                return {  
+                    priority: {
+                        title: 'My Title',
+                        value: 0
+                    },
+                    buttons: {
+                        prev: {
+                            title: "Down"
+                        },
+                        next: {
+                            title: "Up"
+                        }
+                    }
+                }
+            },
+            methods: {
+                change() {
+                    this.title = 'updated title!!!!'
+                },
+                down() {
+                    if (this.priority.value > 0) {
+                        this.priority.value -= 1;
+                    }
+                },
+                up() {
+                    if (this.priority.value < 3) {
+                        this.priority.value += 1;
+                    }
+                }
+            },
+            computed: {
+                message() {
+                    const messages = {
+                        welcome: 'Make some vote',
+                        save: 'Saved'
+                    };
+                    return this.priority.value === 0 ? messages.welcome : messages.save;
+                }
+            }
+        }
+
+        const App2 = {
+            data () {
+                return {
+                    title: 'header'
+                }
+            }
+        }
+
+        Vue.createApp(App).mount('#app');
+        Vue.createApp(App2).mount('#app2');
+        console.log(Vue)
+    </script>
+</body>
+</html>
