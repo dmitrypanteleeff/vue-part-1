@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#1 - Vue Init; work with data</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="app">
+            <ul >
+                <li v-for="item in arr" key="item">{{item}}</li>
+            </ul>
+            <button @click="randomName">Add item</button>
+
+            <hr>
+            {{people}}
+            <ul >
+                
+                <li v-for="item in people" key="item.id">
+                    <h2>{{item.id}}</h2>
+                    <div>{{item.name}} - {{ item.age }}</div>
+                    <div>{{item.mark}}</div>
+                </li>
+
+                <button @click="addNewItem2">Add item</button>
+                
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const App = {
+            data () {
+                return { 
+                    arr: ['Buzz', 'Shrek', 'Moonrise'],
+                    people: [
+                        {
+                            id: 1,
+                            age: 34,
+                            name: 'Buzz',
+                            mark: 4.5,
+                            male: true
+                        },
+                        {
+                            id: 2,
+                            age: 32,
+                            name: 'Shrek',
+                            mark: 3.5,
+                            male: true
+                        },
+                        {
+                            id: 3,
+                            age: 21,
+                            name: 'Moonrise',
+                            mark: 4.7,
+                            male: false
+                        },
+                    ]
+                 }
+            },
+            methods: {
+                addNewItem() {
+                    this.arr.push('Cat in the Boots');
+                },
+                randomFromInterval(min, max) {
+                    return Math.random() * (max - min + 1) + min;
+                },
+                addNewItem2() {
+                    this.people.push({
+                        id: this.people.length + 1,
+                        age: Math.floor(this.randomFromInterval(20,50)),
+                        name: Math.random().toString(36).substring(7),
+                        mark: this.randomFromInterval(3,5).toFixed(2),
+                        male: true
+                    });
+                },
+                randomName() {
+                    const randomName = Math.random().toString(36).substring(7);
+                    this.arr.push(randomName);
+                }
+            }
+        }
+
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+</html>
